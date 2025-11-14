@@ -1,0 +1,16 @@
+----------------------------------------------------------------
+Fri Nov 14 19:21:56 CET 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-019a-839a-41ef-00000e9671d8 
+on database directory C:\Users\aminb\Desktop\DAM2\ProyectoVergaBurger\VegaBurguer_AD_PMDM_Template-master\composeApp\bbdd\vegaburguer with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+Loaded from file:/C:/Users/aminb/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.16.1.1/f9ca2054b3e33ec3f3f19df4a7490352d82de54a/derby-10.16.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=21+35-2513
+user.dir=C:\Users\aminb\Desktop\DAM2\ProyectoVergaBurger\VegaBurguer_AD_PMDM_Template-master\composeApp
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Fri Nov 14 19:22:12 CET 2025:
+Shutting down instance a816c00e-019a-839a-41ef-00000e9671d8 on database directory C:\Users\aminb\Desktop\DAM2\ProyectoVergaBurger\VegaBurguer_AD_PMDM_Template-master\composeApp\bbdd\vegaburguer with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
