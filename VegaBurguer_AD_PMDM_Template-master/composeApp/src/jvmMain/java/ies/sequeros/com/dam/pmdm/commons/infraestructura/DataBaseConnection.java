@@ -1,20 +1,24 @@
 package ies.sequeros.com.dam.pmdm.commons.infraestructura;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DataBaseConnection {
-    private String config_path;
-    private String connection_string;
+    private String configPath;
     private Connection conexion;
 
     public DataBaseConnection() {
     }
+
+    // Este método lo llama tu repositorio para pasarle la ruta "/app.properties"
+    public void setConfig_path(String path) {
+        this.configPath = path;
+    }
+    /*
     public void open() throws Exception {
         FileReader fr = null;
         File f =new File(System.getProperty("user.dir")+
@@ -24,7 +28,7 @@ public class DataBaseConnection {
         try {
             props.load(fr);
         } catch (IOException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
 
         String user = props.getProperty("database.user");
@@ -34,22 +38,45 @@ public class DataBaseConnection {
         this.conexion =
                 DriverManager.getConnection(this.connection_string);
     }
+     */
+    public void open() throws Exception {
+        Properties props = new Properties();
+        // Quitamos la barra inicial si existe para que funcione getResourceAsStream
+        String resourceName = (configPath != null && configPath.startsWith("/")) ? configPath.substring(1) : configPath;
+        if (resourceName == null) resourceName = "app.properties";
+
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(resourceName)) {
+            if (input == null) {
+                throw new IOException("No se encuentra el archivo de propiedades: " + resourceName);
+            }
+            props.load(input);
+
+            // Cargamos los datos del fichero
+            String url = props.getProperty("database.path");
+            String user = props.getProperty("database.user");
+            String pass = props.getProperty("database.password");
+            String driver = props.getProperty("database.driver");
+
+            // Cargar driver
+            if (driver != null) Class.forName(driver);
+
+            // Conectar
+            this.conexion = DriverManager.getConnection(url, user, pass);
+            System.out.println("Conexión a base de datos abierta: " + url);
+
+        } catch (Exception e) {
+            System.err.println("Error al conectar: " + e.getMessage());
+            throw e;
+        }
+    }
 
     public Connection getConnection() {
         return this.conexion;
     }
+
     public void close() throws SQLException {
-
-        conexion.close();
-
-        DriverManager.getConnection(this.connection_string+";shutdown=true");
-
-        conexion = null;
-    }
-    public String getConfig_path() {
-        return config_path;
-    }
-    public void setConfig_path(String config_path) {
-        this.config_path = config_path;
+        if (this.conexion != null && !this.conexion.isClosed()) {
+            this.conexion.close();
+        }
     }
 }
