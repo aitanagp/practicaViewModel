@@ -5,7 +5,7 @@ USE vegaburguer;
 
 -- 2. Tabla de Categorías
 CREATE TABLE IF NOT EXISTS Categorias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     imgPath VARCHAR(255),
     activa BOOLEAN DEFAULT TRUE
@@ -13,12 +13,12 @@ CREATE TABLE IF NOT EXISTS Categorias (
 
 -- 3. Tabla de Productos (Relacionada con Categorías)
 CREATE TABLE IF NOT EXISTS Productos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     precio DECIMAL(10, 2) NOT NULL,
     imgPath VARCHAR(255),
-    categoria_id INT,
+    categoria_id VARCHAR(50),
     activo BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (categoria_id) REFERENCES Categorias(id)
 );
@@ -37,7 +37,7 @@ CREATE TABLE Dependientes (
 
 -- 5. Tabla de Pedidos
 CREATE TABLE IF NOT EXISTS Pedidos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     cliente VARCHAR(100),
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado VARCHAR(20) DEFAULT 'PENDIENTE',
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Pedidos (
 
 -- 6. Tabla de Líneas de Pedido (Detalle)
 CREATE TABLE IF NOT EXISTS LineasPedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     pedido_id INT NOT NULL,
     producto_id INT NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
@@ -58,6 +58,6 @@ CREATE TABLE IF NOT EXISTS LineasPedido (
 -- DATOS DE PRUEBA --
 INSERT INTO Categorias (nombre, imgPath) VALUES ('Hamburguesas', 'burger.png'), ('Bebidas', 'soda.png');
 
--- Usuario Pedro (Admin)
+-- Usuario(Admin)
 INSERT INTO Dependientes (id, name, email, password, image_path, enabled, is_admin)
 VALUES ('1', 'Admin', 'admin@vegaburguer.com', '1234', 'default.png', TRUE, TRUE);

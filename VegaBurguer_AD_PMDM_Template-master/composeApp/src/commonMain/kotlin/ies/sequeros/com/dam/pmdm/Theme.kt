@@ -1,14 +1,11 @@
 package ies.sequeros.com.dam.pmdm
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.Recomposer
-import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
-import kotlinx.coroutines.flow.MutableStateFlow
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFF00A461), //Color(0xFF0061A4),
@@ -31,10 +28,10 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun AppTheme(
-    darkTheme: State<Boolean>,
-    content: @Composable () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable (() -> Unit)
 ) {
-    val colors = if (darkTheme.value) DarkColors else LightColors
+    val colors = if (darkTheme) DarkColors else LightColors
 
     MaterialTheme(
         colorScheme = colors,

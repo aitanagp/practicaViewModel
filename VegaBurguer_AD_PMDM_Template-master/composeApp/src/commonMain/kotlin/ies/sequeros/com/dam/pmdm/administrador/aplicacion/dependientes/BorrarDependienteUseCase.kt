@@ -20,4 +20,5 @@ class BorrarDependienteUseCase(private val repositorio: IDependienteRepositorio,
         //se borra la imagen una vez borrado del repositorio
         almacenDatos.remove(tempoDto.imagePath)
     }
+
 }

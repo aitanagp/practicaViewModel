@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: vegaburguer_db
+    environment:
+      # Contraseña del usuario root
+      MYSQL_ROOT_PASSWORD: root
+
+      # Nombre de la base de datos a crear
+      MYSQL_DATABASE: vegaburguer
+
+      # Usuario y contraseña para tu aplicación (COINCIDEN con app.properties)
+      MYSQL_USER: pedro
+      MYSQL_PASSWORD: pedro
+
+    ports:
+      - "3306:3306" # conecta el puerto de mi máquina con el de la bd
+
+    volumes:
+      - mysql_data:/var/lib/mysql # Para que los datos no se borren al apagar
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Script para crear tablas al inicio
+
+volumes:
+  mysql_data:

@@ -42,11 +42,19 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
 import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.Categorias
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriasViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaForm
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.Dependientes
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteForm
-
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.Pedidos
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidosViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.Productos
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductosViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.form.ProductoForm
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.form.PedidoForm
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
@@ -55,9 +63,12 @@ fun MainAdministrador(
     mainViewModel: MainAdministradorViewModel,
     administradorViewModel: AdministradorViewModel,
     dependientesViewModel: DependientesViewModel,
+    categoriasViewModel: CategoriasViewModel,
+    productosViewModel: ProductosViewModel,
+    pedidosViewModel: PedidosViewModel,
 
 
-    onExit: () -> Unit
+    onExit: () -> Unit,
 ) {
     val navController = rememberNavController()
     val options by mainViewModel.filteredItems.collectAsState() //
@@ -139,7 +150,7 @@ fun MainAdministrador(
 
                 onExit()
             }, "Close", false)
-            )
+        )
     )
 
     //icono seleccionado
@@ -176,7 +187,127 @@ fun MainAdministrador(
                     }
                 )
             }
+            // --- RUTAS DE CATEGORÍAS ---
+            composable(AdminRoutes.Categorias) {
+                Categorias(
+                    categoriasViewModel = categoriasViewModel,
+                    onSelectItem = { categoria ->
+                        categoriasViewModel.selectCategoria(categoria)
+                        navController.navigate(AdminRoutes.Categoria) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+            composable(AdminRoutes.Categoria) {
+                CategoriaForm(
+                    categoriasViewModel = categoriasViewModel,
+                    onClose = {
+                        navController.popBackStack()
+                    },
+                    onConfirm = { formState ->
+                        // Lógica para guardar
+                        if (categoriasViewModel.selected.value == null) {
+                            categoriasViewModel.crear(
+                                id = "",
+                                nombre = formState.nombre,
+                                imgPath = formState.imagePath,
+                                activa = formState.activa
+                            )
+                        } else {
+                            categoriasViewModel.actualizar(
+                                id = categoriasViewModel.selected.value!!.id,
+                                nombre = formState.nombre,
+                                imgPath = formState.imagePath,
+                                activa = formState.activa
+                            )
+                        }
+                        navController.popBackStack()
+                    }
+                )
+            }
+            // ---  RUTAS DE PRODUCTOS ---
+            composable(AdminRoutes.Productos) {
+                Productos(
+                    viewModel = productosViewModel,
+                    onSelectItem = { producto ->
+                        productosViewModel.selectProducto(producto)
+                        navController.navigate(AdminRoutes.Producto) { launchSingleTop = true }
+                    }
+                )
+            }
 
+            composable(AdminRoutes.Producto) {
+                ProductoForm(
+                    productosViewModel = productosViewModel,
+                    onClose = { navController.popBackStack() },
+                    onConfirm = { formState ->
+                        val precioDouble = formState.precio.toDoubleOrNull() ?: 0.0
+                        if (productosViewModel.selected.value == null) {
+                            // Crear
+                            productosViewModel.crear(
+                                nombre = formState.nombre,
+                                descripcion = formState.descripcion,
+                                precio = precioDouble,
+                                imagen = formState.imagePath,
+                                catId = formState.categoriaId,
+                                activo = formState.activo
+                            )
+                        } else {
+                            // Actualizar
+                            productosViewModel.actualizar(
+                                id = productosViewModel.selected.value!!.id,
+                                nombre = formState.nombre,
+                                descripcion = formState.descripcion,
+                                precio = precioDouble,
+                                imagen = formState.imagePath,
+                                catId = formState.categoriaId,
+                                activo = formState.activo
+                            )
+                        }
+                        navController.popBackStack()
+                    }
+                )
+            }
+            composable(AdminRoutes.Pedido) {
+                Pedidos(
+                    viewModel = pedidosViewModel,
+                    onPedidoClick = { pedido ->
+                        pedidosViewModel.selectPedido(pedido)
+                        navController.navigate(AdminRoutes.Pedido) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+
+            // Formulario de Pedido
+            composable(AdminRoutes.Pedido) {
+                PedidoForm(
+                    pedidosViewModel = pedidosViewModel,
+                    onClose = {
+                        navController.popBackStack()
+                    },
+                    onConfirm = { formState ->
+                        val totalDouble = formState.total.toDoubleOrNull() ?: 0.0
+
+                        if (pedidosViewModel.selected.value == null) {
+                            // Crear nuevo
+                            pedidosViewModel.crear(
+                                cliente = formState.cliente,
+                                estado = formState.estado,
+                                total = totalDouble,
+                                fecha = formState.fecha
+                            )
+                        } else {
+                            // Editar existente (Si implementaste Actualizar)
+                            // pedidosViewModel.actualizar(...)
+                            println("Actualizar pedido no implementado aún en este ejemplo")
+                        }
+                        navController.popBackStack()
+                    }
+                )
+            }
         }
     }
 
@@ -271,5 +402,3 @@ fun MainAdministrador(
 
 
 }
-
-
