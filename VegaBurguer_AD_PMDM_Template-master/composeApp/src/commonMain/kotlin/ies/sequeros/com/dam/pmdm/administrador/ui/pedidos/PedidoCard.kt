@@ -66,7 +66,7 @@ fun PedidoCard(
                     Text(
                         text = "Estado: ${pedido.estado}",
                         style = MaterialTheme.typography.labelMedium,
-                        color = if (pedido.estado == "PENDIENTE") Color(0xFFFFA000) else MaterialTheme.colorScheme.onSurface
+                        color = if (pedido.estado == "PENDIENTE") Color(0xFFFF8C00) else MaterialTheme.colorScheme.onSurface
                     )
                 }
             }

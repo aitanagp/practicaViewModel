@@ -41,8 +41,7 @@ public  class BBDDRepositorioDependientesJava {
         return this.dao.getAll();
     }
     public Dependiente findByName(String name){
-
-        return null;
+        return this.dao.findByName(name);
     }
     public Dependiente  getById(String id){
         return this.dao.getById(id);

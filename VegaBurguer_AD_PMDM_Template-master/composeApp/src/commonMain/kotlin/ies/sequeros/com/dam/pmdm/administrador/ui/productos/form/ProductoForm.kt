@@ -64,7 +64,7 @@ fun ProductoForm(
             modifier = Modifier.fillMaxWidth()
         )
 
-        // Selector de Categoría (Dropdown)
+        // Selector de Categoría (desplegable)
         ExposedDropdownMenuBox(
             expanded = expandedCat,
             onExpandedChange = { expandedCat = !expandedCat }

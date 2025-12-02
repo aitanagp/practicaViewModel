@@ -45,10 +45,10 @@ CREATE TABLE IF NOT EXISTS Pedidos (
 );
 
 -- 6. Tabla de Líneas de Pedido (Detalle)
-CREATE TABLE IF NOT EXISTS LineasPedido (
+CREATE TABLE LineasPedido (
     id VARCHAR(50) PRIMARY KEY,
-    pedido_id INT NOT NULL,
-    producto_id INT NOT NULL,
+    pedido_id VARCHAR(50) NOT NULL,
+    producto_id VARCHAR(50) NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
     precio_unitario DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (pedido_id) REFERENCES Pedidos(id),
@@ -61,3 +61,6 @@ INSERT INTO Categorias (nombre, imgPath) VALUES ('Hamburguesas', 'burger.png'), 
 -- Usuario(Admin)
 INSERT INTO Dependientes (id, name, email, password, image_path, enabled, is_admin)
 VALUES ('1', 'Admin', 'admin@vegaburguer.com', '1234', 'default.png', TRUE, TRUE);
+
+INSERT INTO Dependientes (id, name, email, password, image_path, enabled, is_admin)
+VALUES ('1', 'aitana', 'aitana@vegaburguer.com', '1234', 'default.png', TRUE, false);

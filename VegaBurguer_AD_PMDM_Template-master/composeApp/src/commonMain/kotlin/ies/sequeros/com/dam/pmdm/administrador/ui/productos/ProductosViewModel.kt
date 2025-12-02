@@ -62,7 +62,7 @@ class ProductosViewModel(
             try {
                 _productos.value = listarProductosUC.invoke()
             } catch (e: Exception) {
-                println("❌ Error cargando productos: ${e.message}")
+                println("Error cargando productos: ${e.message}")
                 e.printStackTrace()
             }
 
@@ -70,9 +70,9 @@ class ProductosViewModel(
             try {
                 val listaCategorias = listarCategoriasUC.invoke()
                 _categorias.value = listaCategorias
-                println("✅ Categorías cargadas en Productos: ${listaCategorias.size}")
+                println("Categorías cargadas en Productos: ${listaCategorias.size}")
             } catch (e: Exception) {
-                println("❌ Error cargando categorías: ${e.message}")
+                println("Error cargando categorías: ${e.message}")
                 e.printStackTrace()
             }
 

@@ -19,6 +19,11 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriasViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidosViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductosViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.BandejaPedidosScreen
+import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.BandejaPedidosViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.DetallePedidoScreen
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginScreen
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginViewModel
 
 /*
 @Suppress("ViewModelConstructorInComposable")
@@ -80,6 +85,7 @@ fun App(
 
 }*/
 
+
 @Suppress("ViewModelConstructorInComposable")
 @Composable
 fun App(
@@ -106,9 +112,18 @@ fun App(
         ProductosViewModel(productoRepositorio, categoriaRepositorio, almacenImagenes)
     }
 
-    // CORRECCIÓN 1: Pasar también 'almacenImagenes'
     val pedidosViewModel = viewModel {
         PedidosViewModel(pedidoRepositorio, almacenImagenes)
+    }
+
+    // ViewModel para el Login del Dependiente
+    val loginViewModel = viewModel {
+        LoginViewModel(dependienteRepositorio, almacenImagenes)
+    }
+
+    // ViewModel para la Bandeja de Pedidos del Dependiente ---
+    val bandejaPedidosViewModel = viewModel {
+        BandejaPedidosViewModel(pedidoRepositorio)
     }
 
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
@@ -122,14 +137,16 @@ fun App(
             navController = navController,
             startDestination = AppRoutes.Main
         ) {
+            // Pantalla Principal (Selección de rol)
             composable(AppRoutes.Main) {
                 Principal(
                     onAdministrador = { navController.navigate(AppRoutes.Administrador) },
-                    onDependiente = {},
+                    onDependiente = { navController.navigate(AppRoutes.LoginDependiente) },
                     onTPV = {}
                 )
             }
 
+            // Pantalla Administrador
             composable(AppRoutes.Administrador) {
                 MainAdministrador(
                     appViewModel = appViewModel,
@@ -138,8 +155,49 @@ fun App(
                     dependientesViewModel = dependientesViewModel,
                     categoriasViewModel = categoriasViewModel,
                     productosViewModel = productosViewModel,
-                    pedidosViewModel = pedidosViewModel, // CORRECCIÓN 2: Pasarlo (ahora dará error en MainAdmin hasta que lo arregles abajo)
-                    onExit = {
+                    pedidosViewModel = pedidosViewModel,
+                    onExit = { navController.popBackStack() }
+                )
+            }
+
+            // Login Dependiente
+            composable(AppRoutes.LoginDependiente) {
+                LoginScreen(
+                    viewModel = loginViewModel,
+                    onLoginSuccess = { dependiente ->
+                        // Navegar a la bandeja de pedidos al loguearse
+                        navController.navigate(AppRoutes.MainDependiente) {
+                            // Limpia la pila para que no puedan volver al login
+                            popUpTo(AppRoutes.Main) { inclusive = false }
+                        }
+                    },
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            // Pantalla Principal del Dependiente (Lista de pedidos) ---
+            composable(AppRoutes.MainDependiente) {
+                BandejaPedidosScreen(
+                    viewModel = bandejaPedidosViewModel,
+                    onPedidoClick = { idPedido ->
+                        // 1. Seleccionamos el pedido en el VM
+                        bandejaPedidosViewModel.seleccionarPedido(idPedido)
+                        // 2. Navegamos al detalle (asegúrate de tener esta ruta o string definido)
+                        navController.navigate("detalle_pedido")
+                    },
+                    onBack = {
+                        // Al salir, volvemos a la pantalla principal de la App y limpiamos sesión visualmente
+                        navController.popBackStack(AppRoutes.Main, inclusive = false)
+                    }
+                )
+            }
+
+            // --- AÑADIDO: Pantalla Detalle de Pedido ---
+            composable("detalle_pedido") {
+                DetallePedidoScreen(
+                    viewModel = bandejaPedidosViewModel,
+                    onBack = {
+                        // Volvemos a la lista
                         navController.popBackStack()
                     }
                 )

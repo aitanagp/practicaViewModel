@@ -2,8 +2,6 @@ package ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes;
 
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Dependiente;
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.DataBaseConnection;
-// Si usas IDao genérico, descomenta la siguiente línea:
-// import ies.sequeros.com.dam.pmdm.commons.infraestructura.IDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,11 +17,14 @@ public class DependienteDao {
     private DataBaseConnection conn;
     private final String table_name = "Dependientes";
 
+    // Consultas SQL
     private final String insert = "INSERT INTO " + table_name + " (id, name, email, password, image_path, enabled, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String update = "UPDATE " + table_name + " SET name=?, email=?, password=?, image_path=?, enabled=?, is_admin=? WHERE id=?";
     private final String delete = "DELETE FROM " + table_name + " WHERE id=?";
     private final String selectAll = "SELECT * FROM " + table_name;
     private final String selectById = "SELECT * FROM " + table_name + " WHERE id=?";
+    // Consulta para buscar por nombre
+    private final String selectByName = "SELECT * FROM " + table_name + " WHERE name=?";
 
     public void setConn(DataBaseConnection db) {
         this.conn = db;
@@ -63,15 +64,9 @@ public class DependienteDao {
     }
 
     public void delete(Dependiente item) {
-        try (PreparedStatement pst = conn.getConnection().prepareStatement(delete)) {
-            pst.setString(1, item.getId());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        delete(item.getId());
     }
 
-    // Sobrecarga para borrar por ID
     public void delete(String id) {
         try (PreparedStatement pst = conn.getConnection().prepareStatement(delete)) {
             pst.setString(1, id);
@@ -104,12 +99,32 @@ public class DependienteDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null; // Ojo: Kotlin espera Dependiente?, así que null es válido si se maneja
+        return null;
+    }
+
+    // --- IMPLEMENTACIÓN DE FINDBYNAME ---
+    public Dependiente findByName(String name) {
+        Dependiente dependiente = null;
+        try (PreparedStatement pst = conn.getConnection().prepareStatement(selectByName)) {
+            // Asignamos el parámetro del nombre a la consulta
+            pst.setString(1, name);
+
+            ResultSet rs = pst.executeQuery();
+
+            // Si hay resultado, lo convertimos a objeto
+            if (rs.next()) {
+                dependiente = mapRowToDependiente(rs);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DependienteDao.class.getName()).log(Level.SEVERE, "Error buscando dependiente por nombre: " + name, ex);
+            ex.printStackTrace();
+        }
+        return dependiente;
     }
 
     // Mapeo manual de columnas SQL -> Objeto Kotlin
     private Dependiente mapRowToDependiente(ResultSet rs) throws SQLException {
-        // El orden de los argumentos debe coincidir con el constructor de Data Class Kotlin
         return new Dependiente(
                 rs.getString("id"),
                 rs.getString("name"),

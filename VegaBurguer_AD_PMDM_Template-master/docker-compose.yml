@@ -12,8 +12,8 @@ services:
       MYSQL_DATABASE: vegaburguer
 
       # Usuario y contraseña para tu aplicación (COINCIDEN con app.properties)
-      MYSQL_USER: pedro
-      MYSQL_PASSWORD: pedro
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
 
     ports:
       - "3306:3306" # conecta el puerto de mi máquina con el de la bd

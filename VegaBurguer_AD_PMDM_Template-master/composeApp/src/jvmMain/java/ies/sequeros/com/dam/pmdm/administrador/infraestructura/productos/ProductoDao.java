@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**/
 public class ProductoDao {
     private DataBaseConnection conn;
     private final String table_name = "Productos";

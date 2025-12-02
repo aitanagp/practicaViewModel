@@ -30,7 +30,7 @@ public class PedidoDao {
             PreparedStatement pst = conn.getConnection().prepareStatement(sqlPedido);
             pst.setString(1, pedido.getId());
             pst.setString(2, pedido.getCliente());
-            pst.setString(3, pedido.getFecha()); // Asumimos formato fecha String correcto o Timestamp
+            pst.setString(3, pedido.getFecha());
             pst.setString(4, pedido.getEstado());
             pst.setDouble(5, pedido.getTotal());
             pst.executeUpdate();
@@ -56,23 +56,21 @@ public class PedidoDao {
     // OBTENER TODOS LOS PEDIDOS
     public List<Pedido> getAll() {
         List<Pedido> lista = new ArrayList<>();
+
+        // seleccionar de la tabla de PEDIDOS.
         String sql = "SELECT * FROM Pedidos ORDER BY fecha DESC";
 
         try (Statement st = conn.getConnection().createStatement();
              ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-                // Para el listado general, a veces no necesitamos las línea,
-                // pero aquí cargamos todo para simplificaar
+                // 1. Convertimos la fila de la tabla 'pedidos' a un objeto Pedido
                 Pedido p = mapRowToPedido(rs);
-                // Cargamos sus líneas
+
+                // 2. Ahora buscamos las líneas asociadas a ese pedido
                 List<LineaPedido> lineas = getLineasByPedidoId(p.getId());
-                // Reconstruimos el pedido con las líneas (Kotlin data class es inmutable,
-                // pero desde Java podemos usar un constructor o helper si hiciera falta,
-                // aquí asumimos que pasamos la lista en el constructor o usamos un setter ficticio)
-                // Como Pedido es Data Class Kotlin, mejor crearlo todo junto si es posible,
-                // o usar un constructor auxiliar.
-                // *Truco*: Creamos el objeto completo aquí:
+
+                // 3. Creamos el objeto completo
                 Pedido pedidoCompleto = new Pedido(
                         p.getId(), p.getCliente(), p.getFecha(), p.getEstado(), p.getTotal(), lineas
                 );
@@ -87,17 +85,21 @@ public class PedidoDao {
     // OBTENER LÍNEAS DE UN PEDIDO
     private List<LineaPedido> getLineasByPedidoId(String pedidoId) {
         List<LineaPedido> lineas = new ArrayList<>();
+
         String sql = "SELECT * FROM LineasPedido WHERE pedido_id = ?";
+
         try (PreparedStatement pst = conn.getConnection().prepareStatement(sql)) {
-            pst.setString(1, pedidoId);
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()) {
-                lineas.add(new LineaPedido(
-                        rs.getString("id"),
-                        rs.getString("producto_id"),
-                        rs.getInt("cantidad"),
-                        rs.getDouble("precio_unitario")
-                ));
+            pst.setString(1, pedidoId); // Esto rellena la interrogación (?)
+
+            try (ResultSet rs = pst.executeQuery()) { // Usar try-with-resources para cerrar rs
+                while(rs.next()) {
+                    lineas.add(new LineaPedido(
+                            rs.getString("id"),
+                            rs.getString("producto_id"),
+                            rs.getInt("cantidad"),
+                            rs.getDouble("precio_unitario")
+                    ));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,13 +112,14 @@ public class PedidoDao {
         return new Pedido(
                 rs.getString("id"),
                 rs.getString("cliente"),
-                rs.getString("fecha"), // MySQL devuelve DATETIME, Java lo lee como String
+                rs.getString("fecha"),
                 rs.getString("estado"),
                 rs.getDouble("total"),
-                new ArrayList<>() // Lista vacía temporal
+                new ArrayList<>()
         );
     }
 
     public void delete(Pedido item) {
+        // Implementar si es necesario
     }
 }
