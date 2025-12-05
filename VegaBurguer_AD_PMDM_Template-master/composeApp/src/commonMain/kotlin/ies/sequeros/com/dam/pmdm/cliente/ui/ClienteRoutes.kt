@@ -4,5 +4,5 @@ object ClientRoutes {
     const val Bienvenida = "cliente_bienvenida"
     const val Catalogo = "cliente_catalogo"
     const val Carrito = "cliente_carrito"
-    const val Finalizar = "cliente_finalizar"
+    const val Pago = "cliente_pago"
 }

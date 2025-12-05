@@ -3,6 +3,7 @@ package ies.sequeros.com.dam.pmdm
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 
 import androidx.lifecycle.ViewModel
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Dependiente
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,5 +32,17 @@ class AppViewModel: ViewModel() {
     fun swithMode(){
         _darkMode.value=!_darkMode.value;
     }
+    // Aquí guardamos quién ha iniciado sesión (Admin o Dependiente)
+    private val _usuarioSesion = MutableStateFlow<DependienteDTO?>(null)
+    val usuarioSesion = _usuarioSesion.asStateFlow()
 
+    // Función para guardar el usuario al hacer login
+    fun setUsuarioSesion(usuario: DependienteDTO) {
+        _usuarioSesion.value = usuario
+    }
+
+    // Función para cerrar sesión (limpiar usuario)
+    fun cerrarSesion() {
+        _usuarioSesion.value = null
+    }
 }

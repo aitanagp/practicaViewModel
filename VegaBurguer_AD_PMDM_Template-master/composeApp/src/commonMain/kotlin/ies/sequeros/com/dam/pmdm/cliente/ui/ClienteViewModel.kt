@@ -15,7 +15,10 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 // Clase auxiliar para el carrito
 data class LineaCarrito(
@@ -30,24 +33,23 @@ class ClienteViewModel(
     almacenDatos: AlmacenDatos
 ) : ViewModel() {
 
+    // cassos de uso para obtener los datos
     private val listarCategoriasUC = ListarCategoriasUseCase(categoriaRepo, almacenDatos)
     private val listarProductosUC = ListarProductosUseCase(productoRepo, almacenDatos)
     private val crearPedidoUC = CrearPedidoUseCase(pedidoRepo)
-
-    // --- ESTADOS ---
 
     // Nombre del cliente
     private val _nombreCliente = MutableStateFlow("")
     val nombreCliente = _nombreCliente.asStateFlow()
 
-    // Datos maestros
+    // ctagorias
     private val _categorias = MutableStateFlow<List<CategoriaDTO>>(emptyList())
     val categorias = _categorias.asStateFlow()
 
     private val _productos = MutableStateFlow<List<ProductoDTO>>(emptyList())
     val productos = _productos.asStateFlow() // Todos los productos
 
-    // Navegación interna del catálogo (Categoría seleccionada)
+    // Categoría seleccionada
     private val _categoriaSeleccionada = MutableStateFlow<CategoriaDTO?>(null)
     val categoriaSeleccionada = _categoriaSeleccionada.asStateFlow()
 
@@ -91,15 +93,20 @@ class ClienteViewModel(
 
     // Lógica del Carrito (+ y -)
     fun addProducto(producto: ProductoDTO) {
+        // se copia la lista en una nueva lista mutable
         val listaActual = _carrito.value.toMutableList()
+
         val lineaExistente = listaActual.find { it.producto.id == producto.id }
 
+        // si no se ha añadido ningún producto antes al carrito se debe de crear
         if (lineaExistente != null) {
             lineaExistente.cantidad++
         } else {
             listaActual.add(LineaCarrito(producto, 1))
         }
-        _carrito.value = listaActual // Emitir cambio
+
+        // esto es para que se detecte el cambio
+        _carrito.value = listaActual.toList() // Emitir cambio
     }
 
     fun removeProducto(producto: ProductoDTO) {
@@ -112,8 +119,14 @@ class ClienteViewModel(
             } else {
                 listaActual.remove(lineaExistente)
             }
-            _carrito.value = listaActual
+            _carrito.value = listaActual.toList()
         }
+    }
+
+    fun eliminarLineaCompleta(producto: ProductoDTO) {
+        val listaActual = _carrito.value.toMutableList()
+        listaActual.removeAll { it.producto.id == producto.id }
+        _carrito.value = listaActual
     }
 
     fun vaciarCarrito() {
@@ -127,14 +140,16 @@ class ClienteViewModel(
         val lineasCommand = _carrito.value.map {
             CrearLineaPedidoCommand(it.producto.id, it.cantidad, it.producto.precio)
         }
+        // 1. Obtener fecha actual y formatearla para MySQL (YYYY-MM-DD HH:MM:SS)
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val fechaFormateada = sdf.format(Date())
 
         val command = CrearPedidoCommand(
             cliente = _nombreCliente.value,
-            fecha = "Hoy", // Usar fecha real
+            fecha = fechaFormateada,
             total = totalPedido.value,
             lineas = lineasCommand
         )
-
         viewModelScope.launch {
             try {
                 crearPedidoUC.invoke(command)

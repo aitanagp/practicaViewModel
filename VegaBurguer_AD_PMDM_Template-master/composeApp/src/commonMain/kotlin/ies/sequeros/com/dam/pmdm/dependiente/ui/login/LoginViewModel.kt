@@ -3,7 +3,7 @@ package ies.sequeros.com.dam.pmdm.dependiente.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
-import ies.sequeros.com.dam.pmdm.dependiente.aplicacion.login.LoginDependienteUseCase
+import ies.sequeros.com.dam.pmdm.dependiente.aplicacion.login.LoginUseCase
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ class LoginViewModel(
     almacenDatos: AlmacenDatos
 ) : ViewModel() {
 
-    private val loginUseCase = LoginDependienteUseCase(repositorio, almacenDatos)
+    private val loginUseCase = LoginUseCase(repositorio, almacenDatos)
 
     // Estado del formulario
     private val _usuario = MutableStateFlow("")

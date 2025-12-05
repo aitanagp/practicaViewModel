@@ -73,19 +73,19 @@ fun DetallePedidoScreen(
                 Spacer(Modifier.height(16.dp))
                 Text("Productos:", style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(8.dp))
-                /*
+
             // Lista de productos del pedido
             LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(pedido!!.lineas) { linea ->
                     ListItem(
-                        headlineContent = { Text("Producto ID: ${linea.productoId}") }, // Si tuvieras el nombre del producto mejor, pero requeriría cruzar datos
+                        headlineContent = { Text("Producto ID: ${linea.productoId}") },
                         trailingContent = {
                             Text("x${linea.cantidad}", fontWeight = FontWeight.Bold)
                         },
                         tonalElevation = 2.dp
                     )
                 }
-            }*/
+            }
                 val lineas = pedido?.lineas ?: emptyList()
 
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {

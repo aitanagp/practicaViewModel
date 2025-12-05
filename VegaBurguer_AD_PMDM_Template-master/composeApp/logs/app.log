@@ -180,3 +180,236 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '7f292fef-523
 
 dic 02, 2025 5:13:50 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
 INFORMACIÓN: Pedido insertado: 3585831c-8aa3-42f0-bbd7-dd6f9fd8477a
+dic 03, 2025 11:42:35 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Incorrect datetime value: 'Hoy' for column 'fecha' at row 1
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 03, 2025 11:50:11 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: 6688181c-f0be-4e10-8594-c2d07dc42e62
+dic 03, 2025 11:50:22 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '6688181c-f0be-4e10-8594-c2d07dc42e62' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 03, 2025 11:50:29 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '6688181c-f0be-4e10-8594-c2d07dc42e62' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 03, 2025 11:55:46 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: 4a711a59-a303-4291-a9c7-3fca3e040cc5
+dic 03, 2025 5:51:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: 69e7bbf7-30f1-4630-9b41-724e1ccfdf29
+dic 04, 2025 4:34:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: bd74192f-f756-41d8-a702-306c24077789
+dic 04, 2025 4:35:13 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'bd74192f-f756-41d8-a702-306c24077789' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 11:10:38 A. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: 9ec253ce-14c4-4c2b-8a61-b777b4679193
+dic 05, 2025 5:27:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: 03980bc6-7ac9-4433-81f4-746d30537277
+dic 05, 2025 6:10:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+INFORMACIÓN: Pedido insertado: bc1d088e-9639-4216-a967-50523f214fee
+dic 05, 2025 6:50:19 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'bc1d088e-9639-4216-a967-50523f214fee' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 6:50:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'bc1d088e-9639-4216-a967-50523f214fee' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 6:54:31 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'bc1d088e-9639-4216-a967-50523f214fee' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 6:57:41 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '03980bc6-7ac9-4433-81f4-746d30537277' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 6:57:47 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'bd74192f-f756-41d8-a702-306c24077789' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+dic 05, 2025 7:09:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao insert
+GRAVE: null
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '7f292fef-523a-4a61-8e8d-cfd4e2ddf4c8' for key 'Pedidos.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao.insert(PedidoDao.java:36)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidosJava.add(BBDDRepositorioPedidosJava.java:23)
+	at ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDPedidoRepository$add$2.invokeSuspend(BBDDPedidoRepository.kt:41)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+

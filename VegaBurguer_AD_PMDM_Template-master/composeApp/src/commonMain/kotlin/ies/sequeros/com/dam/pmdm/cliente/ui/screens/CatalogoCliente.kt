@@ -37,12 +37,13 @@ fun CatalogoCliente(
     val productos by viewModel.productos.collectAsState()
 
     Scaffold(
-        // --- ÁREA SUPERIOR (Header) ---
         topBar = {
             TopAppBar(
                 title = {
                     Column {
-                        Text("VegaBurguer - C/ Mayor 12", style = MaterialTheme.typography.titleMedium)
+                        // texto direccion
+                        Text("VegaBurguer - C/ IES Antonio Sequeros",
+                            style = MaterialTheme.typography.titleMedium)
                         if (categoriaSeleccionada != null) {
                             Text("Categoría: ${categoriaSeleccionada!!.nombre}", style = MaterialTheme.typography.bodySmall)
                         }
@@ -50,15 +51,18 @@ fun CatalogoCliente(
                 },
                 actions = {
                     // Icono del carrito con contador
+                    // BadgeBox pone el número de productos
                     BadgedBox(badge = {
                         if (numProductos > 0) Badge { Text("$numProductos") }
                     }) {
+                        // aqui se pone el carrito de compra
                         Icon(
                             Icons.Default.ShoppingCart,
                             "Carrito",
                             modifier = Modifier.size(32.dp).clickable { onConfirmar() } // Al pulsar carrito va al resumen
                         )
                     }
+                    // se pone el precio total
                     Spacer(Modifier.width(16.dp))
                     Text("${total} €", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.width(16.dp))
@@ -66,7 +70,7 @@ fun CatalogoCliente(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             )
         },
-        // --- ÁREA INFERIOR (Botones Grandes) ---
+        // ÁREA INFERIOR
         bottomBar = {
             Row(
                 Modifier.fillMaxWidth().padding(16.dp).height(60.dp),

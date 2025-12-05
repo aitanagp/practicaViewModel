@@ -11,7 +11,8 @@ import ies.sequeros.com.dam.pmdm.cliente.ui.ClienteViewModel
 @Composable
 fun BienvenidaCliente(
     viewModel: ClienteViewModel,
-    onComenzar: () -> Unit
+    onComenzar: () -> Unit,
+    onBack: () -> Unit
 ) {
     var nombre by remember { mutableStateOf("") }
 
@@ -42,6 +43,12 @@ fun BienvenidaCliente(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("COMENZAR PEDIDO")
+                }
+               OutlinedButton(
+                    onClick = onBack,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Volver")
                 }
             }
         }

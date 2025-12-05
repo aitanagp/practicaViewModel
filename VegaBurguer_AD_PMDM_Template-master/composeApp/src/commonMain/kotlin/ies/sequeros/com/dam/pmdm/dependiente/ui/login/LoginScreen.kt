@@ -16,6 +16,8 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.De
 fun LoginScreen(
     viewModel: LoginViewModel,
     onLoginSuccess: (DependienteDTO) -> Unit,
+    //onNavigateToAdmin: () -> Unit,
+    //onNavigateToDependiente: () -> Unit,
     onBack: () -> Unit
 ) {
     val usuario by viewModel.usuario.collectAsState()
@@ -25,8 +27,19 @@ fun LoginScreen(
     val usuarioLogueado by viewModel.usuarioLogueado.collectAsState()
 
     LaunchedEffect(usuarioLogueado) {
-        usuarioLogueado?.let {
+        usuarioLogueado?.let { //user ->
             onLoginSuccess(it)
+            /*usuarioLogueado?.let { user ->
+                // 1. Guardar sesión global
+                appViewModel.setUsuarioSesion(user)
+
+                // 2. Decidir navegación según el rol
+                if (user.isAdmin) {
+                    onNavigateToAdmin()
+                } else {
+                    onNavigateToDependiente()
+                }
+            }*/
         }
     }
 

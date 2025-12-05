@@ -19,11 +19,17 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriasViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidosViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductosViewModel
+import ies.sequeros.com.dam.pmdm.cliente.ui.ClientRoutes
+import ies.sequeros.com.dam.pmdm.cliente.ui.ClienteViewModel
+import ies.sequeros.com.dam.pmdm.cliente.ui.screens.BienvenidaCliente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.BandejaPedidosScreen
 import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.BandejaPedidosViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.bandeja.DetallePedidoScreen
 import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginScreen
 import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginViewModel
+import ies.sequeros.com.dam.pmdm.cliente.ui.screens.CarritoCliente
+import ies.sequeros.com.dam.pmdm.cliente.ui.screens.CatalogoCliente
+import ies.sequeros.com.dam.pmdm.cliente.ui.screens.PagoCliente
 
 /*
 @Suppress("ViewModelConstructorInComposable")
@@ -126,6 +132,16 @@ fun App(
         BandejaPedidosViewModel(pedidoRepositorio)
     }
 
+    // viewmodel para clientes
+    val clienteViewModel = viewModel {
+        ClienteViewModel(
+            categoriaRepo = categoriaRepositorio,
+            productoRepo = productoRepositorio,
+            pedidoRepo = pedidoRepositorio,
+            almacenDatos = almacenImagenes
+        )
+    }
+
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
 
@@ -142,7 +158,7 @@ fun App(
                 Principal(
                     onAdministrador = { navController.navigate(AppRoutes.Administrador) },
                     onDependiente = { navController.navigate(AppRoutes.LoginDependiente) },
-                    onTPV = {}
+                    onTPV = {navController.navigate(ClientRoutes.Bienvenida)}
                 )
             }
 
@@ -192,12 +208,68 @@ fun App(
                 )
             }
 
-            // --- AÑADIDO: Pantalla Detalle de Pedido ---
+            // Pantalla Detalle de Pedido
             composable("detalle_pedido") {
                 DetallePedidoScreen(
                     viewModel = bandejaPedidosViewModel,
                     onBack = {
                         // Volvemos a la lista
+                        navController.popBackStack()
+                    }
+                )
+            }
+            // Pantalla Inicio CLiente
+            composable(ClientRoutes.Bienvenida) {
+                BienvenidaCliente(
+                    viewModel = clienteViewModel,
+                    onComenzar = {
+                        navController.navigate(ClientRoutes.Catalogo)
+                    },
+                    onBack = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+            // 2. Catálogo (Principal)
+            composable(ClientRoutes.Catalogo) {
+                CatalogoCliente(
+                    viewModel = clienteViewModel,
+                    onCancelar = {
+                        // Vuelve al inicio borrando historial
+                        navController.navigate(AppRoutes.Main) { popUpTo(AppRoutes.Main) { inclusive = true } }
+                    },
+                    onConfirmar = {
+                        // Va al carrito/resumen
+                        navController.navigate(ClientRoutes.Carrito)
+                    }
+                )
+            }
+
+            // 3. Carrito (Detalle)
+            composable(ClientRoutes.Carrito) {
+                CarritoCliente(
+                    viewModel = clienteViewModel,
+                    onVolver = { navController.popBackStack() },
+                    onConfirmar = {
+                        navController.navigate(ClientRoutes.Pago)
+                    },
+                    onCancelarPedido = {
+                        navController.navigate(AppRoutes.Main) { popUpTo(AppRoutes.Main) { inclusive = true } }
+                    }
+                )
+            }
+
+            // 4. Pago
+            composable(ClientRoutes.Pago) {
+                PagoCliente(
+                    viewModel = clienteViewModel,
+                    onFinalizar = {
+                        // Al terminar, volvemos a la pantalla principal de la app (o a Bienvenida)
+                        navController.navigate(AppRoutes.Main) {
+                            popUpTo(AppRoutes.Main) { inclusive = true }
+                        }
+                    },
+                    onBack = {
                         navController.popBackStack()
                     }
                 )

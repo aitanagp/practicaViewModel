@@ -121,5 +121,17 @@ public class PedidoDao {
 
     public void delete(Pedido item) {
         // Implementar si es necesario
+        delete(item.getId());
+    }
+
+    public void delete(String id) {
+        // Implementar si es necesario
+        String sql = "DELETE FROM Pedidos WHERE id = ?";
+        try (PreparedStatement pst = conn.getConnection().prepareStatement(sql)) {
+            pst.setString(1, id);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
